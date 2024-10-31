@@ -1,41 +1,42 @@
 #include <iostream>
 using namespace std;
 
-bool isLeapYear(int year) {
-    if (year % 100 == 0) {
-        return year % 400 == 0;
+double calculateCharge(double weight, int distance) {
+    double rate;
+    if (weight <= 2) {
+        rate = 1.10;
+    }
+    else if (weight <= 6) {
+        rate = 2.20;
+    }
+    else if (weight <= 10) {
+        rate = 3.70;
     }
     else {
-        return year % 4 == 0;
+        rate = 4.80;
     }
-}
 
-int daysInMonth(int month, int year) {
-    switch (month) {
-    case 1: case 3: case 5: case 7: case 8: case 10: case 12:
-        return 31;
-    case 4: case 6: case 9: case 11:
-        return 30;
-    case 2:
-        return isLeapYear(year) ? 29 : 28;
-    default:
-        return 0; 
-    }
+    return rate * (distance / 500.0);
 }
 
 int main() {
-    int month, year;
+    double weight;
+    int distance;
 
-    cout << "Enter a month (1–12): ";
-    cin >> month;
-    while (month < 1 || month > 12) {
-        cout << "Invalid month. Please enter a month between 1 and 12: ";
-        cin >> month;
+    cout << "Enter the weight of the package (kg): ";
+    cin >> weight;
+    while (weight <= 0 || weight > 20) {
+        cout << "Invalid weight. Enter a weight between 0 and 20 kg: ";
+        cin >> weight;
     }
 
-    cout << "Enter a year: ";
-    cin >> year;
+    cout << "Enter the distance to be shipped (miles): ";
+    cin >> distance;
+    while (distance < 10 || distance > 3000) {
+        cout << "Invalid distance. Enter a distance between 10 and 3000 miles: ";
+        cin >> distance;
+    }
 
-    cout << daysInMonth(month, year) << " days\n";
+    cout << "The shipping charge is $" << calculateCharge(weight, distance) << endl;
     return 0;
 }
