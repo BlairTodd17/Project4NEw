@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-double calculateCharge(double weight, int distance) {
+static double calculateCharge(double weight, int distance) {
     double rate;
     if (weight <= 2) {
         rate = 1.10;
